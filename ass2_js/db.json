@@ -1,0 +1,244 @@
+{
+  "categories": [
+    {
+      "id": "1",
+      "name": "Điện thoại"
+    },
+    {
+      "id": "2",
+      "name": "Laptop"
+    },
+    {
+      "id": "3",
+      "name": "Phụ kiện"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "name": "Quản trị",
+      "email": "admin@susan.vn",
+      "pass": "123456",
+      "role": "admin"
+    },
+    {
+      "id": "2",
+      "name": "User demo",
+      "email": "user@susan.vn",
+      "pass": "123456",
+      "role": "user"
+    }
+  ],
+  "products": [
+    {
+      "id": "102",
+      "name": "MacBook Air M1 256GB",
+      "price": 17990000,
+      "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1200&auto=format&fit=crop",
+      "desc": "MacBook Air M1 mượt mà, pin trâu.",
+      "categoryId": 2,
+      "stock": 5,
+      "specs": {
+        "Màn hình": "13.3 inch Retina",
+        "Chip": "Apple M1",
+        "RAM": "8 GB",
+        "Ổ cứng": "256 GB SSD",
+        "Hệ điều hành": "macOS",
+        "Pin": "Lên tới 18 giờ"
+      }
+    },
+    {
+      "id": "103",
+      "name": "Tai nghe Bluetooth",
+      "price": 499000,
+      "image": "/img/iPhone 13 128GB.avif",
+      "desc": "Tai nghe không dây âm thanh rõ nét.",
+      "categoryId": 3,
+      "stock": 30,
+      "specs": {
+        "Kết nối": "Bluetooth 5.0",
+        "Thời gian dùng": "6–8 giờ",
+        "Kháng nước": "IPX4",
+        "Trọng lượng": "~45 g"
+      }
+    },
+    {
+      "id": "104",
+      "name": "Sạc nhanh 20W",
+      "price": 249000,
+      "image": "https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=1200&auto=format&fit=crop",
+      "desc": "Sạc nhanh chuẩn PD 20W.",
+      "categoryId": 3,
+      "stock": 50
+    },
+    {
+      "id": "105",
+      "name": "Chuột không dây",
+      "price": 299000,
+      "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1200&auto=format&fit=crop",
+      "desc": "Chuột 2.4GHz, pin bền.",
+      "categoryId": 3,
+      "stock": 25
+    },
+    {
+      "id": "106",
+      "name": "Loa Bluetooth mini",
+      "price": 690000,
+      "image": "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?q=80&w=1200&auto=format&fit=crop",
+      "desc": "Loa mini âm trầm tốt.",
+      "categoryId": 3,
+      "stock": 18
+    },
+    {
+      "id": "2db7",
+      "name": "iPhone 13 128GB",
+      "price": 12990000,
+      "image": "/img/iPhone 13 128GB.avif",
+      "desc": "",
+      "categoryId": 1,
+      "stock": 8
+    }
+  ],
+  "orders": [
+    {
+      "id": "e7e0",
+      "userId": "2",
+      "items": [
+        {
+          "pid": 102,
+          "qty": 1,
+          "price": 0
+        },
+        {
+          "pid": "103",
+          "qty": 1,
+          "price": 499000
+        }
+      ],
+      "total": 18489000,
+      "address": {
+        "name": "vule",
+        "phone": "1234567890",
+        "line": "abc",
+        "note": ""
+      },
+      "createdAt": "2025-10-17T20:44:40.287Z",
+      "status": "new"
+    },
+    {
+      "id": "2132",
+      "userId": "2",
+      "items": [
+        {
+          "pid": "103",
+          "qty": 1,
+          "price": 499000
+        }
+      ],
+      "total": 499000,
+      "address": {
+        "name": "vule",
+        "phone": "1234567890",
+        "line": "abc",
+        "note": ""
+      },
+      "createdAt": "2025-10-17T20:44:57.466Z",
+      "status": "new"
+    },
+    {
+      "id": "8c33",
+      "userId": "2",
+      "items": [
+        {
+          "pid": "102",
+          "qty": 1,
+          "price": 17990000
+        },
+        {
+          "pid": "103",
+          "qty": 1,
+          "price": 499000
+        },
+        {
+          "pid": "104",
+          "qty": 1,
+          "price": 249000
+        }
+      ],
+      "total": 18738000,
+      "address": {
+        "name": "vule",
+        "phone": "1234567890",
+        "line": "abc",
+        "note": ""
+      },
+      "createdAt": "2025-10-17T20:49:51.720Z",
+      "status": "new"
+    },
+    {
+      "id": "0c08",
+      "userId": "1",
+      "items": [
+        {
+          "pid": 102,
+          "qty": 3,
+          "price": 17990000
+        },
+        {
+          "pid": 103,
+          "qty": 1,
+          "price": 499000
+        }
+      ],
+      "total": 54469000,
+      "address": {
+        "name": "vule",
+        "phone": "1234567890",
+        "line": "abc",
+        "note": ""
+      },
+      "createdAt": "2025-10-17T21:13:04.883Z",
+      "status": "new"
+    },
+    {
+      "id": "5eab",
+      "userId": "1",
+      "items": [
+        {
+          "pid": "102",
+          "qty": 1,
+          "price": 17990000
+        }
+      ],
+      "total": 17990000,
+      "address": {
+        "name": "vule",
+        "phone": "1234567890",
+        "line": "abc",
+        "note": ""
+      },
+      "createdAt": "2025-10-18T05:24:25.184Z",
+      "status": "new"
+    },
+    {
+      "id": "87b8",
+      "userId": "1",
+      "items": [
+        {
+          "pid": "102",
+          "qty": 1,
+          "price": 17990000
+        }
+      ],
+      "total": 17990000,
+      "address": {
+        "name": "vule",
+        "phone": "1234567890",
+        "line": "abc",
+        "note": ""
+      },
+      "createdAt": "2025-10-20T05:35:18.406Z",
+      "status": "new"
+    }
+  ]
+}

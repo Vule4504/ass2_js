@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Giỏ hàng – Susan Shop</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --primary: #ef4444;
+        --dark: #0f172a;
+        --muted: #64748b;
+        --ring: #e5e7eb;
+      }
+      body {
+        background: #f8fafc;
+        color: #0f172a;
+      }
+      .navbar {
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+      }
+      .navbar .badge-cart {
+        position: absolute;
+        top: -6px;
+        right: -10px;
+      }
+      .footer {
+        background: #0b1220;
+        color: #cbd5e1;
+        padding: 40px 0;
+        margin-top: 40px;
+      }
+      .footer h6 {
+        color: #fff;
+        font-weight: 700;
+      }
+      .footer a {
+        color: #cbd5e1;
+        text-decoration: none;
+      }
+      .footer a:hover {
+        color: #fff;
+        text-decoration: underline;
+      }
+      .admin-chip {
+        font-size: 12px;
+        padding: 2px 8px;
+        background: #e2e8f0;
+        border-radius: 999px;
+        color: #0f172a;
+      }
+      .required::after {
+        content: " *";
+        color: #ef4444;
+      }
+      .qty-control {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .qty-btn {
+        width: 28px;
+        height: 28px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--ring);
+        background: #fff;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+      .qty-input {
+        width: 48px;
+        text-align: center;
+        border: 1px solid var(--ring);
+        border-radius: 6px;
+        height: 28px;
+        line-height: 28px;
+      }
+      .card-table th,
+      .card-table td {
+        vertical-align: middle;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="site-header"></div>
+
+    <section class="container my-4">
+      <div class="row g-4">
+        <div class="col-lg-7">
+          <h4>Giỏ hàng</h4>
+          <div id="cartList" class="vstack gap-3 mt-2"></div>
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <div class="h5">Tổng: <span id="cartTotal">0</span></div>
+            <button id="btnProceed" class="btn btn-dark">
+              Tiếp tục thanh toán
+            </button>
+          </div>
+          <div id="loginHint" class="form-text text-danger d-none mt-2">
+            Bạn cần đăng nhập để mua hàng.
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div id="addressCard" class="card d-none">
+            <div class="card-body">
+              <h5 class="card-title">Địa chỉ giao hàng</h5>
+              <form id="checkoutForm" class="vstack gap-2">
+                <div>
+                  <label class="form-label required">Họ tên</label
+                  ><input id="addrName" class="form-control" required />
+                </div>
+                <div>
+                  <label class="form-label required">Số điện thoại</label
+                  ><input id="addrPhone" class="form-control" required />
+                </div>
+                <div>
+                  <label class="form-label required">Địa chỉ</label
+                  ><input id="addrLine" class="form-control" required />
+                </div>
+                <div>
+                  <label class="form-label">Ghi chú</label
+                  ><textarea
+                    id="addrNote"
+                    class="form-control"
+                    rows="3"
+                  ></textarea>
+                </div>
+                <button class="btn btn-dark mt-2" type="submit">
+                  <i class="bi bi-bag-check me-1"></i>Đặt hàng
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script>
+      async function renderCartPage() {
+        const list = document.getElementById("cartList");
+        const items = SUSAN.getCart();
+        const products = await SUSAN.get("/products");
+        if (!items.length) {
+          list.innerHTML =
+            '<div class="alert alert-secondary">Giỏ hàng trống.</div>';
+        } else {
+          list.innerHTML = items
+            .map((x) => {
+              const p = products.find((i) => String(i.id) === String(x.pid));
+              if (!p) return "";
+              return `
+      <div class="d-flex gap-3 align-items-center border rounded-3 p-2">
+        <img src="${
+          p.image
+        }" style="width:80px;height:80px;object-fit:cover;border-radius:8px">
+        <div class="flex-grow-1">
+          <div class="fw-semibold"><a href="product.html?id=${
+            p.id
+          }" class="link-dark text-decoration-none">${p.name}</a></div>
+          <div class="small text-muted">Đơn giá: ${SUSAN.fmtVND(p.price)}</div>
+          <div class="d-flex align-items-center justify-content-between mt-1">
+            <div class="qty-control">
+              <button class="qty-btn" onclick='decQty(${JSON.stringify(
+                p.id
+              )})'><i class="bi bi-dash"></i></button>
+              <input class="qty-input" value="${
+                x.qty
+              }" oninput='inputQty(${JSON.stringify(p.id)}, this.value)'/>
+              <button class="qty-btn" onclick='incQty(${JSON.stringify(
+                p.id
+              )})'><i class="bi bi-plus"></i></button>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+              <strong>${SUSAN.fmtVND(p.price * x.qty)}</strong>
+              <button class="btn btn-outline-danger btn-sm" onclick='removeItem(${JSON.stringify(
+                p.id
+              )})'><i class="bi bi-trash3"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>`;
+            })
+            .join("");
+        }
+        document.getElementById("cartTotal").textContent =
+          await SUSAN.cartTotal().then((v) => SUSAN.fmtVND(v));
+        SUSAN.updateCartBadge();
+        document
+          .getElementById("loginHint")
+          .classList.toggle("d-none", SUSAN.isLogged());
+      }
+      function incQty(pid) {
+        const it = SUSAN.getCart().find((x) => String(x.pid) === String(pid));
+        SUSAN.cartUpdate(pid, (it?.qty || 0) + 1);
+        renderCartPage();
+      }
+      function decQty(pid) {
+        const it = SUSAN.getCart().find((x) => String(x.pid) === String(pid));
+        if (!it) return;
+        SUSAN.cartUpdate(pid, Math.max(1, (it.qty || 1) - 1));
+        renderCartPage();
+      }
+      function inputQty(pid, val) {
+        const n = Math.max(1, parseInt(val || "1", 10));
+        SUSAN.cartUpdate(pid, n);
+        renderCartPage();
+      }
+      function removeItem(pid) {
+        SUSAN.cartRemove(pid);
+        renderCartPage();
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        renderCartPage();
+        document.getElementById("btnProceed").addEventListener("click", () => {
+          if (!SUSAN.isLogged()) {
+            SUSAN.openLogin();
+            return;
+          }
+          if (!SUSAN.getCart().length) {
+            SUSAN.toast("Giỏ hàng trống");
+            return;
+          }
+          document.getElementById("addressCard").classList.remove("d-none");
+          document.getElementById("addrName").focus();
+        });
+        document
+          .getElementById("checkoutForm")
+          .addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const items = SUSAN.getCart();
+            if (!items.length) {
+              SUSAN.toast("Giỏ hàng trống");
+              return;
+            }
+            const s = SUSAN.getSession();
+            const products = await SUSAN.get("/products");
+            const order = {
+              userId: s.id,
+              items: items.map((x) => ({
+                pid: x.pid,
+                qty: x.qty,
+                price:
+                  (products.find((p) => String(p.id) === String(x.pid)) || {})
+                    .price || 0,
+              })),
+              total: await SUSAN.cartTotal(),
+              address: {
+                name: document.getElementById("addrName").value.trim(),
+                phone: document.getElementById("addrPhone").value.trim(),
+                line: document.getElementById("addrLine").value.trim(),
+                note: document.getElementById("addrNote").value.trim(),
+              },
+              createdAt: new Date().toISOString(),
+              status: "new",
+            };
+            await SUSAN.createOrder(order);
+            SUSAN.cartClear();
+            location.href = "thanks.html";
+          });
+      });
+    </script>
+
+    <div id="site-footer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="assets/app.js"></script>
+    <script>
+      SUSAN.renderHeader("");
+      SUSAN.renderFooter();
+    </script>
+  </body>
+</html>

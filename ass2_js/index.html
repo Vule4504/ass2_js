@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Susan Shop – Trang chủ</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --primary: #ef4444;
+        --dark: #0f172a;
+        --muted: #64748b;
+        --ring: #e5e7eb;
+      }
+      body {
+        background: #f8fafc;
+        color: #0f172a;
+      }
+      .navbar {
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+      }
+      .navbar .badge-cart {
+        position: absolute;
+        top: -6px;
+        right: -10px;
+      }
+      .footer {
+        background: #0b1220;
+        color: #cbd5e1;
+        padding: 40px 0;
+        margin-top: 40px;
+      }
+      .footer h6 {
+        color: #fff;
+        font-weight: 700;
+      }
+      .footer a {
+        color: #cbd5e1;
+        text-decoration: none;
+      }
+      .footer a:hover {
+        color: #fff;
+        text-decoration: underline;
+      }
+      .admin-chip {
+        font-size: 12px;
+        padding: 2px 8px;
+        background: #e2e8f0;
+        border-radius: 999px;
+        color: #0f172a;
+      }
+      .required::after {
+        content: " *";
+        color: #ef4444;
+      }
+      .qty-control {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .qty-btn {
+        width: 28px;
+        height: 28px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--ring);
+        background: #fff;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+      .qty-input {
+        width: 48px;
+        text-align: center;
+        border: 1px solid var(--ring);
+        border-radius: 6px;
+        height: 28px;
+        line-height: 28px;
+      }
+      .card-table th,
+      .card-table td {
+        vertical-align: middle;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="site-header"></div>
+
+    <section class="hero">
+      <div id="heroSlide" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button
+            type="button"
+            data-bs-target="#heroSlide"
+            data-bs-slide-to="0"
+            class="active"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#heroSlide"
+            data-bs-slide-to="1"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#heroSlide"
+            data-bs-slide-to="2"
+          ></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active" style="height: 440px">
+            <img
+              src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=1600&auto=format&fit=crop"
+              class="d-block w-100"
+              style="height: 100%; object-fit: cover; filter: brightness(0.55)"
+            />
+            <div class="carousel-caption" style="bottom: 18%">
+              <h2 class="fw-bold">Điện thoại chính hãng</h2>
+              <p>Giảm đến 20% – Bảo hành 12 tháng</p>
+              <a href="products.html" class="btn btn-danger">Mua ngay</a>
+            </div>
+          </div>
+          <div class="carousel-item" style="height: 440px">
+            <img
+              src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1600&auto=format&fit=crop"
+              class="d-block w-100"
+              style="height: 100%; object-fit: cover; filter: brightness(0.55)"
+            />
+            <div class="carousel-caption" style="bottom: 18%">
+              <h2 class="fw-bold">Laptop học tập & làm việc</h2>
+              <p>Hỗ trợ trả góp 0%</p>
+              <a href="products.html" class="btn btn-light">Khám phá</a>
+            </div>
+          </div>
+          <div class="carousel-item" style="height: 440px">
+            <img
+              src="https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?q=80&w=1600&auto=format&fit=crop"
+              class="d-block w-100"
+              style="height: 100%; object-fit: cover; filter: brightness(0.55)"
+            />
+            <div class="carousel-caption" style="bottom: 18%">
+              <h2 class="fw-bold">Phụ kiện xịn – Giá tốt</h2>
+              <p>Sạc nhanh, tai nghe, loa Bluetooth...</p>
+              <a href="products.html" class="btn btn-danger">Xem ngay</a>
+            </div>
+          </div>
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#heroSlide"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#heroSlide"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon"></span>
+        </button>
+      </div>
+    </section>
+
+    <section class="container my-5">
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <h3 class="m-0">Sản phẩm nổi bật</h3>
+        <a class="btn btn-outline-dark btn-sm" href="products.html"
+          >Xem tất cả</a
+        >
+      </div>
+      <div id="featureGrid" class="row g-3"></div>
+    </section>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", async () => {
+        const list = await SUSAN.get("/products");
+        const grid = document.getElementById("featureGrid");
+        grid.innerHTML = list
+          .slice(0, 6)
+          .map(
+            (p) => `
+    <div class="col-12 col-sm-6 col-lg-4">
+      <div class="card h-100">
+        <img src="${
+          p.image
+        }" class="card-img-top" style="height:190px;object-fit:cover">
+        <div class="card-body d-flex flex-column">
+          <h6 class="card-title">${p.name}</h6>
+          <div class="mb-3 fw-bold text-danger">${SUSAN.fmtVND(p.price)}</div>
+          <div class="mt-auto d-flex gap-2">
+            <a href="product.html?id=${
+              p.id
+            }" class="btn btn-outline-secondary">Chi tiết</a>
+            <button class="btn btn-dark" onclick='SUSAN.cartAdd(${JSON.stringify(
+              p.id
+            )},1)'>Thêm giỏ</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `
+          )
+          .join("");
+      });
+    </script>
+
+    <div id="site-footer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="assets/app.js"></script>
+    <script>
+      SUSAN.renderHeader("home");
+      SUSAN.renderFooter();
+    </script>
+  </body>
+</html>
